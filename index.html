@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoho Cliq 2026 Product Tour</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:#0f1320;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .modal{width:min(1180px,98vw);background:
+      radial-gradient(120% 90% at 0% 0%, #ece9ff 0%, #f3f1fb 42%, #eaf5ee 100%);
+    border-radius:30px;padding:30px 30px 0;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .badge{position:absolute;top:18px;left:30px;font-weight:800;font-size:22px;color:#4f5bff;display:flex;align-items:baseline;gap:8px}
+  .badge small{font-size:14px;color:#8a92a6;font-weight:600}
+  .close{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:50%;
+    background:#fff;border:1px solid #e7e9f0;font-size:20px;color:#6b7385;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:172px;gap:16px;margin-top:54px}
+  .card{background:#fff;border-radius:18px;border:1px solid rgba(0,0,0,.04);
+    box-shadow:0 10px 30px rgba(28,36,60,.08);padding:16px 16px 0;overflow:hidden;display:flex;flex-direction:column}
+  .card h3{font-size:16.5px;color:#1d2433;font-weight:700;padding-bottom:11px;border-bottom:1px solid #eef0f6}
+  .shot{position:relative;width:calc(100% + 32px);margin:12px -16px 0;flex:1;min-height:70px;background:#f4f6fb}
+  .shot img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;padding:6px}
+  .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:5px;color:#9aa3b8;text-align:center;padding:12px;
+    background:repeating-linear-gradient(45deg,#f4f6fb,#f4f6fb 12px,#eef1f8 12px,#eef1f8 24px)}
+  .ph b{font-size:12.5px;color:#6b7385} .ph span{font-size:11px;line-height:1.35}
+
+  /* welcome + closing */
+  .center{margin-top:60px;min-height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px}
+  .center h1{font-size:60px;font-weight:800;line-height:1;background:linear-gradient(90deg,#4f5bff,#8a3ffd);
+    -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px}
+  .center p{font-size:17px;color:#3f4658;max-width:600px;line-height:1.55}
+  .pills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+  .pill{background:#fff;border:1px solid #e7e9f0;border-radius:14px;padding:12px 18px;font-weight:600;color:#3f4658;font-size:14px;box-shadow:0 6px 18px rgba(28,36,60,.07)}
+  .ctaBtns{display:flex;gap:14px;margin-top:30px}
+  .ctaBtns a{padding:14px 26px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none}
+  .ctaBtns .primary{background:#4f5bff;color:#fff} .ctaBtns .ghost{background:#fff;border:1px solid #cfd5e6;color:#3f4658}
+
+  /* ---- announcement (slide 1) ---- */
+  .an-head{text-align:center;max-width:880px;margin:38px auto 26px}
+  .an-kick{font-size:22px;font-weight:800;background:linear-gradient(90deg,#3aa0ff,#7a5cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .an-h1{font-size:60px;font-weight:850;color:#10142a;letter-spacing:-1px;line-height:1;margin:6px 0 16px}
+  .an-h1 span{background:linear-gradient(90deg,#4f5bff,#8a3ffd);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .an-sub{font-size:15.5px;color:#4a5266;line-height:1.5;max-width:600px;margin:0 auto}
+  .an-btns{display:flex;gap:13px;justify-content:center;margin-top:22px}
+  .an-learn{background:#3b6cf6;color:#fff;border:none;border-radius:12px;padding:13px 22px;font-weight:700;font-size:14.5px;cursor:pointer}
+  .an-skip{background:#fff;color:#3f4658;border:1px solid #cfd5e6;border-radius:12px;padding:13px 22px;font-weight:600;font-size:14.5px;cursor:pointer}
+  .an-collage{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;margin:0 auto;padding-bottom:6px}
+  .an-card{background:#fff;border:1px solid #eef0f6;border-radius:16px;padding:14px;
+    box-shadow:0 16px 36px rgba(40,40,90,.08);opacity:0;transform:translateY(16px);animation:rise .55s ease forwards;
+    transition:transform .2s ease, box-shadow .2s ease}
+  .an-card:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(40,40,90,.16)}
+  .an-card:nth-child(1){animation-delay:.05s}.an-card:nth-child(2){animation-delay:.10s}
+  .an-card:nth-child(3){animation-delay:.15s}.an-card:nth-child(4){animation-delay:.20s}
+  .an-card:nth-child(5){animation-delay:.25s}.an-card:nth-child(6){animation-delay:.30s}
+  .an-card:nth-child(7){animation-delay:.35s}.an-card:nth-child(8){animation-delay:.40s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .an-t{font-size:14px;font-weight:750;color:#1d2433;margin-bottom:10px}
+  .an-viz{background:#f7f8fc;border-radius:11px;padding:12px;min-height:92px;position:relative;overflow:hidden}
+  .an-bar{height:7px;border-radius:5px;background:#dde1ee;margin:6px 0}
+  .an-bar.s{width:55%}.an-bar.m{width:78%}.an-bar.l{width:100%}
+  .an-chip{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;background:#eef1fb;color:#5560a8;margin:2px 3px 0 0}
+  .an-search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e6f1;border-radius:8px;padding:7px 9px;margin-bottom:8px}
+  .an-mag{width:12px;height:12px;border:2px solid #8a93ad;border-radius:50%;position:relative;flex:none}
+  .an-mag::after{content:"";position:absolute;right:-4px;bottom:-2px;width:6px;height:2px;background:#8a93ad;transform:rotate(45deg)}
+  .an-thumb{width:52px;height:40px;border-radius:8px;flex:none;background:linear-gradient(135deg,#dfe6ff,#f0e6ff);display:flex;align-items:center;justify-content:center}
+  .an-play{width:0;height:0;border-left:11px solid #6d6af0;border-top:7px solid transparent;border-bottom:7px solid transparent}
+  .an-bub{display:inline-block;padding:6px 10px;border-radius:12px;font-size:11px;background:#eef0f6;color:#3f4658}
+  .an-capframe{height:66px;background:#e9ecf5;border-radius:8px;position:relative}
+  .an-cap{position:absolute;left:8px;right:8px;bottom:8px;background:#1d2433;color:#fff;font-size:10px;padding:5px 8px;border-radius:7px;animation:capblink 2.4s ease-in-out infinite}
+  @keyframes capblink{0%,100%{opacity:.85}50%{opacity:1}}
+  .an-orb{width:44px;height:44px;border-radius:50%;margin:2px auto 8px;background:radial-gradient(circle at 35% 30%,#fff,#d8c6ff 45%,#9b6cff);animation:anglow 3s ease-in-out infinite}
+  @keyframes anglow{0%,100%{box-shadow:0 0 0 0 rgba(155,108,255,.25)}50%{box-shadow:0 0 16px 5px rgba(155,108,255,.3)}}
+  .an-slot{width:22px;height:32px;border-radius:6px;background:#e6e9f2;display:inline-block}
+  .an-slot.ok{background:#c7edd8;border:1px solid #46b97e;animation:anpop 1.9s ease-in-out infinite}
+  @keyframes anpop{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .an-node{position:absolute;width:15px;height:15px;border-radius:5px;background:#fff;border:1.5px solid #b9c2e6}
+  .an-line{position:absolute;height:2px;background:#cfd6ee;transform-origin:left center}
+  /* looping motifs */
+  .an-viz{min-height:104px}
+  .an-fill{height:7px;border-radius:5px;background:#cdd4ee;margin:7px 0;width:0;animation:anfill 2.8s ease-in-out infinite}
+  .an-fill:nth-child(2){animation-delay:.3s}.an-fill:nth-child(3){animation-delay:.6s}
+  @keyframes anfill{0%{width:0}45%{width:100%}82%{width:100%}100%{width:0}}
+  .an-eq{display:flex;gap:4px;align-items:flex-end;height:24px;margin-top:10px}
+  .an-eq i{width:5px;border-radius:3px;background:#7aa0ff;height:7px;animation:aneq .9s ease-in-out infinite}
+  .an-eq i:nth-child(2){animation-delay:.15s}.an-eq i:nth-child(3){animation-delay:.3s}.an-eq i:nth-child(4){animation-delay:.45s}.an-eq i:nth-child(5){animation-delay:.6s}
+  @keyframes aneq{0%,100%{height:6px}50%{height:22px}}
+  .an-car{display:inline-block;width:2px;height:13px;background:#3b6cf6;vertical-align:middle;animation:ancar 1s steps(1) infinite}
+  @keyframes ancar{50%{opacity:0}}
+  .an-drift{animation:andrift 4.5s ease-in-out infinite}
+  .an-drift:nth-child(2){animation-delay:1.2s}
+  @keyframes andrift{0%,100%{transform:translateY(0);opacity:.78}50%{transform:translateY(-5px);opacity:1}}
+  .an-pop{transform:scale(.5);opacity:0;animation:anpopin 3s ease-in-out infinite}
+  .an-pop:nth-child(2){animation-delay:.5s}
+  @keyframes anpopin{0%{transform:scale(.5);opacity:0}14%{transform:scale(1);opacity:1}72%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}
+  .an-flow{position:relative;height:78px}
+  .an-trav{position:absolute;width:8px;height:8px;border-radius:50%;background:#3b6cf6;box-shadow:0 0 0 3px rgba(59,108,246,.18);animation:antrav 2.8s linear infinite}
+  @keyframes antrav{0%{left:18px;top:12px}33%{left:152px;top:12px}66%{left:84px;top:54px}100%{left:18px;top:12px}}
+  .an-hl{animation:anhl 3s ease-in-out infinite}
+  @keyframes anhl{0%,100%{transform:translateX(0)}50%{transform:translateX(-7px)}}
+  @media(max-width:880px){.an-collage{grid-template-columns:repeat(2,1fr)}.an-h1{font-size:42px}}
+
+  .dots{display:flex;gap:8px;justify-content:center;padding:22px 0 18px}
+  .dots i{width:8px;height:8px;border-radius:50%;background:#cfd5e6;display:block;cursor:pointer}
+  .dots i.on{width:24px;border-radius:8px;background:#4f5bff}
+
+  .foot{background:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.7);
+    margin:0 -30px;padding:24px 40px 28px;border-radius:0 0 30px 30px;display:grid;
+    grid-template-columns:120px 1fr 120px;align-items:center;gap:20px}
+  .foot .t{grid-column:2;text-align:center}
+  .foot h2{font-size:30px;font-weight:800;background:linear-gradient(90deg,#4f5bff,#8a3ffd);
+    -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
+  .foot p{font-size:14.5px;color:#3f4658;line-height:1.5;max-width:760px;margin:0 auto}
+  .foot a.lm{color:#4f5bff;font-weight:600;text-decoration:none}
+  .nav{display:inline-flex;align-items:center;justify-content:center;border:1px solid #cfd5e6;background:#fff;
+    color:#3f4658;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:600;cursor:pointer;gap:6px;user-select:none}
+  .nav.prev{grid-column:1} .nav.next{grid-column:3;background:#4f5bff;color:#fff;border-color:#4f5bff}
+  .nav[disabled]{opacity:.4;cursor:default}
+  @media(max-width:780px){.grid{grid-template-columns:repeat(2,1fr)}.card{grid-column:span 2 !important;grid-row:span 1 !important}.foot{grid-template-columns:1fr}.foot .t,.nav{grid-column:1}}
+</style>
+</head>
+<body>
+  <div class="modal">
+    <div class="badge">Cliq 2026 <small>Product Tour</small></div>
+    <button class="close">×</button>
+    <div id="stage"></div>
+    <div class="dots" id="dots"></div>
+    <div class="foot">
+      <button class="nav prev" id="prev">← Prev</button>
+      <div class="t"><h2 id="ft"></h2><p id="fp"></p></div>
+      <button class="nav next" id="next">Next →</button>
+    </div>
+  </div>
+
+<script>
+const SLIDES = [
+  { type:"welcome", title:"Welcome to Cliq 2026",
+    desc:"We went after the missing seconds, the gaps between deciding and doing. Here’s what’s new in Cliq 2026." },
+
+  { title:"Built to give your time back",
+    desc:"Find it fast: hashtags group topics so every related message is one click away, and Advanced Search filters across Messages, Links and Files. Replies View and the Enriched Sidebar keep follow-ups in reach, while Multimedia Summaries and Voice Transcripts tell you what’s inside before you open it.",
+    cards:[
+      {t:"Advanced Search", f:"advanced_search.png", d:"Pinpoint a message by sender, channel, date, tag & content", c:4,r:2},
+      {t:"Hashtags", f:"hashtags.png", d:"Mark what matters; one search brings the story back", c:2,r:1},
+      {t:"Replies View", f:"replies_view.png", d:"Every reply & @mention to you, in one place", c:2,r:1},
+      {t:"Enriched Sidebar", f:"enriched_sidebar.png", d:"A redesigned left panel: a map of what matters", c:2,r:1},
+      {t:"Multimedia Summaries", f:"multimedia_summaries.png", d:"Key points from images, audio, video & PDFs", c:2,r:1},
+      {t:"Voice Transcripts", f:"voice_transcripts.png", d:"Read any voice message at your own pace", c:2,r:1},
+    ]},
+
+  { title:"Work, uninterrupted",
+    desc:"Stay in the chat: Chat Tabs keep your tools one click away, Quick Replies turn a decision into an action in one tap, and Composer upgrades make messages cleaner. Recurring Reminders keep tasks on track, Auto-Response covers you when you’re away, and Report Messages flags issues to admins, with no tab-switching.",
+    cards:[
+      {t:"Chat Tabs", f:"chat_tabs.png", d:"Pin Projects, Files, Widgets, Forms, Links & Analytics above the chat", c:4,r:2},
+      {t:"Quick Replies", f:"quick_replies.png", d:"Suggested replies & one-tap actions, in the same breath as deciding", c:2,r:2},
+      {t:"Auto-Response 2.0", f:"auto_response.png", d:"Out-of-office replies for DMs, channels & external users", c:3,r:1},
+      {t:"Composer Upgrades", f:"composer.png", d:"Lists, nested lists & cleaner formatting", c:3,r:1},
+      {t:"Recurring Reminders", f:"recurring_reminders.png", d:"Handle one occurrence or the whole series", c:3,r:1},
+      {t:"Report Messages", f:"report_messages.png", d:"Flag a message straight to your admins", c:3,r:1},
+    ]},
+
+  { title:"Meetings that keep up",
+    desc:"Meet without the friction: Slot Suggestions end the scheduling back-and-forth, and the chat bar lets you start or join from anywhere in Zoho. Live Captions keep everyone following along, while PiP and Pin Video keep the call, and the right speaker, in view as you work.",
+    cards:[
+      {t:"Live Captions", f:"live_captions.png", d:"Real-time captions, with summaries & action items after", c:4,r:2},
+      {t:"Slot Suggestions", f:"slot_suggestions.png", d:"See when everyone’s free", c:2,r:2},
+      {t:"PiP Support", f:"pip.png", d:"Keep the call nearby while you work", c:2,r:1},
+      {t:"Pin Video", f:"pin_video.png", d:"Keep the key speaker in focus", c:2,r:1},
+      {t:"Meetings in Chat Bar", f:"meetings_chat_bar.png", d:"Start or join from anywhere in Zoho", c:2,r:1},
+    ]},
+
+  { title:"Build it once",
+    desc:"Automation used to need someone technical. Now anyone can build a bot by dragging and dropping blocks on a visual canvas. Set it up once and it never skips a step. The Coding Assistant turns plain language into Deluge, Adaptive Widget Tabs keep widgets loading fast, and MCP & OpenAPI, Bring Your Own AI Models and REST APIs v3 open Cliq to the agents and tools you already trust.",
+    cards:[
+      {t:"No-Code Bot Builder", f:"flow_builder.png", d:"Build automations on a visual drag-and-drop canvas, no code", c:4,r:2},
+      {t:"Coding Assistant", f:"coding_assistant.png", d:"Describe it in plain language; Zia writes the Deluge", c:2,r:1},
+      {t:"Adaptive Widget Tabs", f:"adaptive_widget_tabs.png", d:"Faster widgets that load only what you need", c:2,r:1},
+      {t:"MCP Server & OpenAPI", f:"mcp_server.png", d:"Connect external agents; turn any API into a tool", c:2,r:1},
+      {t:"Bring Your Own AI Models", f:"byo_ai.png", d:"Anthropic, Cohere, Gemini, ChatGPT or Zoho AI + custom prompts", c:2,r:1},
+      {t:"REST APIs v3", f:"rest_v3.png", d:"Full UI parity; docs open in Claude / ChatGPT", c:2,r:1},
+    ]},
+
+  { title:"No one left behind",
+    desc:"Built for everyone: Accessibility controls and Sign Language Mode make the workspace usable for all, Client Users bring partners into exactly the right channels, and Flexible Subscription gives each person the plan they need.",
+    cards:[
+      {t:"Accessibility", f:"accessibility.png", d:"Font scaling, contrast & focus indicators (WCAG 2.0)", c:4,r:2},
+      {t:"Sign Language Mode", f:"sign_language.png", d:"Pin an interpreter on screen for everyone", c:2,r:1},
+      {t:"Client Users", f:"client_users.png", d:"Bring guests into scoped channels & DMs", c:2,r:1},
+      {t:"Flexible Subscription", f:"flexible_subscription.png", d:"Subscription tiers that match how your team is structured", c:6,r:1},
+    ]},
+
+  { type:"closing", title:"That’s a wrap on the busywork.",
+    desc:"Dozens of fixes to the friction you stopped noticing, until everything just Cliqs." },
+];
+
+let cur=0;
+const stage=document.getElementById('stage');
+const dotsEl=document.getElementById('dots');
+const ft=document.getElementById('ft'), fp=document.getElementById('fp');
+const prev=document.getElementById('prev'), next=document.getElementById('next');
+
+function render(){
+  const s=SLIDES[cur];
+  let html="";
+  if(s.type==="welcome"){
+    html=buildWelcome(s);
+  } else if(s.type==="closing"){
+    html=`<div class="center"><h1>Your new Cliq is ready!</h1>
+      <div class="ctaBtns"><a class="primary" href="#">Get started</a><a class="ghost" href="#">View release notes</a></div></div>`;
+  } else {
+    html=`<div class="grid">`+ s.cards.map(c=>`
+      <div class="card" style="grid-column:span ${c.c};grid-row:span ${c.r}">
+        <h3>${c.t}</h3>
+        <div class="shot">
+          <img src="${c.f}" alt="${c.t}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="ph" style="display:none"><b>${c.f}</b><span>${c.d}</span></div>
+        </div>
+      </div>`).join("") + `</div>`;
+  }
+  stage.innerHTML=html;
+  ft.textContent=s.title;
+  fp.innerHTML=s.desc + (s.type? "" : ' <a class="lm" href="#">Learn More</a>');
+  dotsEl.innerHTML=SLIDES.map((_,i)=>`<i class="${i===cur?'on':''}" onclick="go(${i})"></i>`).join("");
+  prev.disabled = cur===0;
+  next.disabled = cur===SLIDES.length-1;
+  document.querySelector('.foot').style.display = 'grid';
+}
+function skip(){ go(SLIDES.length-1); }
+function buildWelcome(s){
+  return `
+  <div class="an-head">
+    <div class="an-kick">Announcing</div>
+    <h1 class="an-h1">Zoho Cliq <span>2026</span></h1>
+  </div>
+  <div class="an-collage">
+    <div class="an-card"><div class="an-t">Advanced Search &amp; Hashtags</div>
+      <div class="an-viz">
+        <div class="an-search"><span class="an-mag"></span><span style="font-size:11px;color:#8a93ad">website redesign</span><span class="an-car"></span></div>
+        <div class="an-bar l"></div><div class="an-bar m"></div>
+        <div style="margin-top:8px"><span class="an-chip an-drift">#launch</span><span class="an-chip an-drift">#q3-okrs</span></div>
+      </div>
+    </div>
+    <div class="an-card"><div class="an-t">Multimedia Summaries</div>
+      <div class="an-viz" style="display:flex;gap:10px;align-items:flex-start">
+        <div class="an-thumb"><span class="an-play"></span></div>
+        <div style="flex:1"><div class="an-fill"></div><div class="an-fill"></div><div class="an-fill"></div></div>
+      </div>
+    </div>
+    <div class="an-card"><div class="an-t">Quick Replies</div>
+      <div class="an-viz">
+        <div><span class="an-bub">How was your day?</span></div>
+        <div style="margin-top:10px"><span class="an-chip an-pop" style="background:#eaf0ff;color:#3b6cf6">I’m great, you?</span><span class="an-chip an-pop" style="background:#eaf0ff;color:#3b6cf6">Sure</span></div>
+      </div>
+    </div>
+    <div class="an-card"><div class="an-t">Live Captions</div>
+      <div class="an-viz">
+        <div class="an-capframe" style="height:46px"><div class="an-cap">“…stay inside the conversation”</div></div>
+        <div class="an-eq"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <div class="an-card"><div class="an-t">Slot Suggestions</div>
+      <div class="an-viz" style="display:flex;align-items:center;justify-content:center;gap:6px">
+        <span class="an-slot"></span><span class="an-slot ok"></span><span class="an-slot"></span><span class="an-slot"></span><span class="an-slot"></span>
+      </div>
+    </div>
+    <div class="an-card"><div class="an-t">Bring Your Own AI Model</div>
+      <div class="an-viz" style="text-align:center">
+        <div class="an-orb"></div>
+        <div><span class="an-chip">Claude</span><span class="an-chip">Gemini</span><span class="an-chip">GPT</span></div>
+      </div>
+    </div>
+    <div class="an-card"><div class="an-t">No-Code Bot Builder</div>
+      <div class="an-viz"><div class="an-flow">
+        <span class="an-line" style="left:28px;top:18px;width:64px;transform:rotate(24deg)"></span>
+        <span class="an-line" style="left:96px;top:58px;width:64px;transform:rotate(-24deg)"></span>
+        <span class="an-node" style="left:14px;top:10px"></span>
+        <span class="an-node" style="left:150px;top:10px"></span>
+        <span class="an-node" style="left:82px;top:52px"></span>
+        <span class="an-trav"></span>
+      </div></div>
+    </div>
+    <div class="an-card"><div class="an-t">Enriched Sidebar</div>
+      <div class="an-viz" style="display:flex;gap:9px">
+        <div style="width:7px;border-radius:4px;background:#dde1ee"></div>
+        <div style="flex:1"><div class="an-bar l"></div><div class="an-bar m an-hl" style="background:#c9d2ff"></div><div class="an-bar l"></div><div class="an-bar s"></div></div>
+      </div>
+    </div>
+  </div>`;
+}
+function go(i){cur=Math.max(0,Math.min(SLIDES.length-1,i));render();}
+prev.onclick=()=>go(cur-1);
+next.onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);});
+render();
+</script>
+</body>
+</html>
