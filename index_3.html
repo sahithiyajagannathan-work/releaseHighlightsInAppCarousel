@@ -17,10 +17,6 @@
   .badge small{font-size:14px;color:#8a92a6;font-weight:600}
   .close{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:50%;
     background:#fff;border:1px solid #e7e9f0;font-size:20px;color:#6b7385;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.08)}
-  .reopen{position:fixed;top:14px;right:14px;z-index:3;display:none;background:#fff;border:1px solid #e7e9f0;
-    border-radius:12px;padding:10px 16px;font-weight:700;font-size:13.5px;color:#4f5bff;cursor:pointer;
-    box-shadow:0 8px 24px rgba(0,0,0,.28);align-items:center;gap:7px}
-  .reopen i{width:8px;height:8px;border-radius:50%;background:#e2410e;display:inline-block;animation:livepulse 1.6s ease-in-out infinite}
 
   /* persistent progress pill */
   .prog{position:absolute;top:20px;right:72px;background:#fff;border:1px solid #e7e9f0;border-radius:12px;
@@ -39,8 +35,6 @@
   .chead{padding-bottom:10px;border-bottom:1px solid #eef0f6}
   .card h3{font-size:16px;color:#1d2433;font-weight:700;line-height:1.2;padding-right:34px}
   .card .sub{font-size:11.5px;color:#8a92a6;font-weight:600;margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
-  .tagchip{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
-    background:#fff3e8;color:#e2410e;border:1px solid #f4c9a8;border-radius:7px;padding:2px 7px;margin-left:6px;vertical-align:middle}
   .go{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;background:#eef1fb;color:#4f5bff;
     display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;opacity:0;transition:opacity .18s ease}
   .seen{position:absolute;top:14px;right:46px;width:18px;height:18px;border-radius:50%;background:#46b97e;color:#fff;
@@ -98,13 +92,10 @@
     box-shadow:0 16px 40px rgba(28,36,60,.10);min-height:380px}
   .dshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14px}
   .dinfo{display:flex;flex-direction:column;justify-content:center}
-  .dtags{display:flex;gap:8px;margin-bottom:14px}
-  .dtag{display:inline-flex;font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
-    background:#eef1fb;color:#4f5bff;border-radius:8px;padding:5px 10px}
-  .dtag.warn{background:#fff3e8;color:#e2410e}
+  .dtag{display:inline-flex;align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    background:#eef1fb;color:#4f5bff;border-radius:8px;padding:5px 10px;margin-bottom:14px}
   .dinfo h2{font-size:34px;font-weight:800;color:#10142a;line-height:1.12;letter-spacing:-.5px;margin-bottom:14px}
   .dinfo p{font-size:15.5px;color:#3f4658;line-height:1.6;max-width:420px}
-  .dnote{margin-top:16px;font-size:13px;color:#6b7385;background:#f4f6fb;border:1px solid #e7e9f0;border-radius:10px;padding:10px 14px;max-width:420px;line-height:1.5}
   .dbtns{display:flex;gap:12px;margin-top:24px}
   .dbtns a{padding:13px 22px;border-radius:12px;font-weight:700;font-size:14.5px;text-decoration:none}
   .dbtns .primary{background:#4f5bff;color:#fff}
@@ -203,6 +194,8 @@
     margin:0 -30px;padding:24px 40px 28px;border-radius:0 0 30px 30px;display:grid;
     grid-template-columns:120px 1fr 120px;align-items:center;gap:20px}
   .foot .t{grid-column:2;text-align:center}
+  .fkick{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:#8a3ffd;background:#f1e9ff;
+    border-radius:8px;padding:4px 11px;margin-bottom:8px;text-transform:uppercase}
   .foot h2{font-size:30px;font-weight:800;background:linear-gradient(90deg,#4f5bff,#8a3ffd);
     -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
   .foot p{font-size:14.5px;color:#3f4658;line-height:1.5;max-width:760px;margin:0 auto}
@@ -217,7 +210,6 @@
 <body>
   <div class="bgdrop"></div>
   <div class="scrim"></div>
-  <button class="reopen" id="reopen"><i></i>What’s new</button>
   <div class="modal">
     <div class="badge">Cliq 2026 <small>Product Tour</small></div>
     <div class="prog"><span id="pgtxt"><b>0</b> / 27 explored</span><div class="pgbar"><i id="pgfill"></i></div></div>
@@ -226,93 +218,97 @@
     <div class="dots" id="dots"></div>
     <div class="foot">
       <button class="nav prev" id="prev">← Prev</button>
-      <div class="t"><h2 id="ft"></h2><p id="fp"></p></div>
+      <div class="t"><div id="fkickwrap"></div><h2 id="ft"></h2><p id="fp"></p></div>
       <button class="nav next" id="next">Next →</button>
     </div>
   </div>
 
 <script>
 const SLIDES = [
-  { type:"welcome", title:"Welcome to Cliq 2026",
-    desc:"This year, we went after the missing seconds, the moments between intention and action, where work feels harder than it needs to. Here’s what’s new in Cliq 2026. Take the tour, a few of the cards are live." },
+  { type:"welcome", kick:"Monday, 8:58 AM", title:"Welcome to Cliq 2026",
+    desc:"Follow one Monday through Cliq 2026 — from finding a decision, to acting on it, to automating it — and see where the missing seconds went." },
 
-  { title:"Built to give your time back",
-    desc:"Work has a habit of scattering itself. Almost everything you look for already exists somewhere, the file shared, the question answered, the decision made. What gets lost is the path back to it, and that’s what this release rebuilds. Click any card to explore, the search box is live.",
+  { kick:"Monday · 9:02 AM", title:"Catch up in minutes, not an hour",
+    desc:"You open Cliq to 200 unread messages. Search lands last week’s decision instantly, #launch pulls the whole story back, Replies View shows exactly what needs you, and summaries & transcripts tell you what’s inside before you open anything. Click any card to explore — the search box is live, try it.",
     cards:[
       {t:"Advanced Search", h:"Find any message in seconds", f:"advanced_search.png", d:"Pinpoint a message by sender, channel, date, tag & content", c:4,r:2, demo:"search",
-       long:"Stop scrolling to find that one message. Filter by sender, channel, date range, tag and content type, across Messages, Links and Files, and land on exactly what you were looking for.", note:"Search (Cmd/Ctrl + K) → Advanced search"},
+       long:"Stop scrolling to find that one message. Filter by sender, channel, date range, tag and content type — across Messages, Links and Files — and land on exactly what you were looking for. The search you run at 4:55 PM on a Friday finally works like you’d hope."},
       {t:"Hashtags", h:"One tag brings the story back", f:"hashtags.png", d:"Mark what matters; one search brings the story back", c:2,r:1,
-       long:"A project never stays in one conversation. It lives in two channels, six DMs and a thread abandoned in April. Tag the messages that matter as they happen, #launch, #q3-okrs, anything. Later, one click on the tag pulls every related message back together, across chats and channels, in order. Context that used to take twenty minutes of scrolling now takes one tap.", note:"History → Hashtags"},
-      {t:"Replies View", h:"Every reply to you, in one place", f:"replies_view.png", d:"Every reply & @mention to you, in one place", c:2,r:1,
-       long:"Every reply and @mention directed at you, collected in a single view. No more re-opening ten channels to check whether someone answered, your follow-ups come to you, in one place, in order.", note:"You can also set whether your unread badge counts mentions, replies, or both."},
-      {t:"Enriched Sidebar", h:"Your chat list, decluttered", f:"enriched_sidebar.png", d:"Search & filters in the sidebar: unread, @mentions, drafts, DMs", c:2,r:1,
-       long:"The left panel now carries its own search, and filters that cut through the stack: unread, unread @mentions, drafts and direct messages, with mark all as read one click away. Tap the unread filter and the list narrows to just the chats waiting on you. Collapse the sidebar entirely when you need full focus, and your messages get centre stage."},
+       long:"Tag decisions, blockers and launches as they happen — #launch, #q3-okrs, anything. Later, one click on the tag pulls every related message back together, across chats and channels, in order. Context that used to take twenty minutes of scrolling now takes one tap."},
+      {t:"Replies View", h:"Never miss a reply to you", f:"replies_view.png", d:"Every reply & @mention to you, in one place", c:2,r:1,
+       long:"Every reply and @mention directed at you, collected in a single view. No more re-opening ten channels to check whether someone answered — your follow-ups come to you, in one place, in order."},
+      {t:"Enriched Sidebar", h:"Your day, mapped at a glance", f:"enriched_sidebar.png", d:"A redesigned left panel: a map of what matters", c:2,r:1,
+       long:"The left panel is redesigned to work like a map of your day: what needs you first, what’s active, what can wait. Less hunting through a flat list of chats, more knowing where to look before you even think about it."},
       {t:"Multimedia Summaries", h:"Know what’s inside before opening", f:"multimedia_summaries.png", d:"Key points from images, audio, video & PDFs", c:2,r:1,
-       long:"That 40-minute recording someone dropped in the channel? Get the key points first. Cliq summarizes images, audio, video and PDFs so you can decide in seconds whether a file needs your attention, before you open it."},
+       long:"That 40-minute recording someone dropped in the channel? Get the key points first. Cliq summarizes images, audio, video and PDFs so you can decide in seconds whether a file needs your attention — before you open it."},
       {t:"Voice Transcripts", h:"Read voice notes anywhere", f:"voice_transcripts.png", d:"Read any voice message at your own pace", c:2,r:1,
-       long:"Voice messages are faster to send, but not always convenient to hear. The update you need might be twenty seconds in, and sometimes you’re in a meeting or on a train. Every voice message now comes with a transcript, so you can read it at your pace and place. Skim it, search it, quote it. Listen only when you want to."},
+       long:"In a meeting, on a train, or just faster at reading than listening — every voice message now comes with a transcript. Skim it, search it, quote it. Listen only when you want to."},
     ]},
 
-  { title:"Work, uninterrupted",
-    desc:"Every trip out of a conversation costs something. Ten seconds to switch, ten to remember why. It happens twenty times a day, and every switch costs you the thought you were holding when you left. This set closes that gap. Click any card to explore, the replies are tappable.",
+  { kick:"9:40 AM", title:"Act without leaving the chat",
+    desc:"Decision found — now act on it. Quick Replies answer in one tap (try it on the card), Chat Tabs keep the project board above the conversation, reminders recur on their own, and Auto-Response covers you when you step away. Click any card to explore.",
     cards:[
-      {t:"Chat Tabs", h:"Your work, pinned above the chat", f:"chat_tabs.png", d:"Pin Projects, Files, Widgets, Forms, Links & Analytics above the chat", c:4,r:2,
-       long:"Your product document is in Writer, the tracker in a Sheet, the dashboard in Analytics, and every “check the details” sends you on a small expedition. Chat tabs pin these work items above the chat: tasks, files, widgets, forms, links, dashboards and reports, all within arm’s reach.", note:"Supports: Projects · WorkDrive · Widgets · Forms · Analytics · Links"},
-      {t:"Quick Replies", h:"Reply in one tap", f:"quick_replies.png", d:"Suggested replies & one-tap actions, in the same breath as deciding", c:2,r:2, demo:"replies", badge:"Admin opt-in",
-       long:"Cliq suggests context-aware replies and one-tap actions the moment a message arrives, so the gap between deciding and doing disappears. Approve, confirm, or answer in the same breath as reading.", note:"AI features ship off by default. Your admin can enable Quick Replies from the Admin Panel."},
-      {t:"Auto-Response 2.0", h:"Your absence answers for itself", f:"auto_response.png", d:"Out-of-office replies for DMs, channels & external users", c:3,r:1,
-       long:"Set your out-of-office and someone will still @mention you in a channel. Not carelessly, they just don’t know. The auto-response now answers there too, covering group chats, channels and external channels alongside DMs. It replies once per 24 hours, only on mention, with the same message everywhere or a different one per context.", note:"Click on your profile picture → Auto-response"},
+      {t:"Chat Tabs", h:"Your tools, one click above the chat", f:"chat_tabs.png", d:"Pin Projects, Files, Widgets, Forms, Links & Analytics above the chat", c:4,r:2,
+       long:"Pin Projects, Files, Widgets, Forms, Links and Analytics as tabs right above the conversation they belong to. The project board lives with the project channel; the sprint doc lives with the sprint chat. No more juggling six browser tabs to follow one discussion."},
+      {t:"Quick Replies", h:"Reply in one tap", f:"quick_replies.png", d:"Suggested replies & one-tap actions, in the same breath as deciding", c:2,r:2, demo:"replies",
+       long:"Cliq suggests context-aware replies and one-tap actions the moment a message arrives, so the gap between deciding and doing disappears. Approve, confirm, or answer in the same breath as reading."},
+      {t:"Auto-Response 2.0", h:"Covered while you’re away", f:"auto_response.png", d:"Out-of-office replies for DMs, channels & external users", c:3,r:1,
+       long:"Set an auto-response once and it covers DMs, channels and even external users — with different messages for different audiences if you want. People get an answer; you get an uninterrupted vacation."},
       {t:"Composer Upgrades", h:"Cleaner messages, less effort", f:"composer.png", d:"Lists, nested lists & cleaner formatting", c:3,r:1,
-       long:"A handful of refinements to the writing experience: properly formatted bullets and numbered lists, support for escaping markdown when you want text to stay text, and tuned performance so emoji suggestions appear almost instantly."},
-      {t:"Recurring Reminders", h:"Set it once, stay on track", f:"recurring_reminders.png", d:"Handle one occurrence or the whole series", c:3,r:1, badge:"Enhancement",
-       long:"An enhancement to the reminders you already use: recurring series now behave properly. Mark one occurrence complete and next week’s stays put, or clear the whole series in one motion. Each action lands exactly where you point it, one occurrence, or all of them."},
-      {t:"Report Messages", h:"Report a message straight to your admins", f:"report_messages.png", d:"Flag a message straight to your admins", c:3,r:1,
-       long:"When a message crosses a line, report it in two clicks and it goes straight to the admins your organisation configured, through the Approvals bot, with full context. No screenshots, no forwarding, no asking around about who handles this.", note:"Hover on a message: More actions → Report Message"},
+       long:"Lists, nested lists and cleaner formatting come to the composer. Structured updates, meeting notes and step-by-step instructions now look the way you meant them — without fighting the editor."},
+      {t:"Recurring Reminders", h:"Set it once, stay on track", f:"recurring_reminders.png", d:"Handle one occurrence or the whole series", c:3,r:1,
+       long:"Weekly reports, standups, review cycles — set a reminder once and let it recur. Edit or complete a single occurrence, or manage the whole series at once. The routine work stops depending on your memory."},
+      {t:"Report Messages", h:"Flag issues straight to admins", f:"report_messages.png", d:"Flag a message straight to your admins", c:3,r:1,
+       long:"See something that shouldn’t be there? Report it in two clicks and it goes straight to your admins with full context. No screenshots, no awkward forwarding, no leaving the chat."},
     ]},
 
-  { title:"Meetings that keep up",
-    desc:"Meet without the friction. Slot Suggestions end the scheduling negotiation before it begins, the chat bar lets you start or join from anywhere in Zoho, Live Captions keep everyone following along, and PiP keeps the call in view as you work. Click any card to explore, the captions are live.",
+  { kick:"11:00 AM", title:"Standup, without the friction",
+    desc:"Time for standup. Slot Suggestions found a time everyone could make, you join straight from the chat bar, Live Captions keep everyone following (watch them type on the card), and PiP keeps the call in view while you pull up the doc. Click any card to explore.",
     cards:[
-      {t:"Live Captions", h:"Nobody misses a word", f:"live_captions.png", d:"Real-time captions, with summaries & action items after", c:4,r:2, demo:"captions",
-       long:"Real-time captions keep everyone following along, noisy cafés, quiet offices, non-native speakers, hard-of-hearing teammates. And when the meeting ends, summaries and action items are waiting, so nobody has to have been taking notes. English and Hindi to start, more coming soon.", note:"Turn captions on or off from More Options in the meeting toolbar."},
+      {t:"Live Captions", h:"Follow every word, live", f:"live_captions.png", d:"Real-time captions, with summaries & action items after", c:4,r:2, demo:"captions",
+       long:"Real-time captions keep everyone following along — noisy cafés, quiet offices, non-native speakers, hard-of-hearing teammates. And when the meeting ends, summaries and action items are waiting, so nobody has to have been taking notes."},
       {t:"Slot Suggestions", h:"End the scheduling back-and-forth", f:"slot_suggestions.png", d:"See when everyone’s free", c:2,r:2,
-       long:"Scheduling a meeting is itself a meeting. “Does Thursday work?” travels through four people and comes back on Wednesday. Now, add participants to an event and their free and busy slots surface immediately, with suggested times the whole group can make. The negotiation ends before it begins.", note:"Schedule meeting → Slot suggestions under Participants"},
+       long:"“Does 3 work? No? 4:30?” — gone. Cliq reads everyone’s availability and suggests slots where the whole group is actually free. Pick one, done. Scheduling a meeting stops being a meeting of its own."},
       {t:"PiP Support", h:"Keep the call in view while you work", f:"pip.png", d:"Keep the call nearby while you work", c:2,r:1,
-       long:"Picture-in-picture keeps the call nearby in a compact window while you check your mail, review a document, update a task, or pull up the information someone just asked for."},
+       long:"Pop the call into a floating picture-in-picture window and keep working. Check the doc, answer the chat, find the file — the meeting stays in the corner of your eye instead of owning your whole screen."},
       {t:"Pin Video", h:"Keep the key speaker in focus", f:"pin_video.png", d:"Keep the key speaker in focus", c:2,r:1,
-       long:"Pin the person who matters, the presenter, the interviewer, the interpreter, and they stay front no matter who else speaks. The grid stops shuffling; your attention stops chasing it."},
+       long:"Pin the person who matters — the presenter, the interviewer, the interpreter — and they stay front and center no matter who else speaks. The grid stops shuffling; your attention stops chasing it."},
       {t:"Meetings in Chat Bar", h:"Start or join from anywhere", f:"meetings_chat_bar.png", d:"Start or join from anywhere in Zoho", c:2,r:1,
-       long:"The Cliq chat bar brings conversations and meetings closer to wherever you’re already working across Zoho. Join a Cliq meeting or start a quick call from Mail, Writer, or any Workplace app, without switching back and forth."},
+       long:"The chat bar follows you across Zoho apps — and now it carries meetings with it. Start or join a call from CRM, Projects, Desk, wherever you are, without switching back to Cliq first."},
     ]},
 
-  { title:"Build it once",
-    desc:"Software is learning to act, not just respond. The repetitive layer of work should run on its own, so human attention goes where creativity and judgment actually matter. This is the platform layer, where Cliq becomes a surface you build on. Click any card to explore.",
+  { kick:"2:15 PM", title:"Automate it, so Monday never repeats",
+    desc:"That follow-up you just did by hand? Build it once. Anyone can drag blocks onto a visual canvas and ship a bot — no code — or describe it in plain language and let Zia write the Deluge. MCP & OpenAPI, your own AI models and REST APIs v3 plug in the tools you already trust. Click any card to explore.",
     cards:[
-      {t:"No-Code Bot Builder", h:"Build it once, it never skips a step", f:"flow_builder.png", d:"Build automations on a visual drag-and-drop canvas, no code", c:4,r:2,
-       long:"Every team has its rituals. The new hire who gets the same four links and five channel invites assembled by hand, the IT channel answering the same how-do-I question every week. Flow Builder turns these into bots anyone can put together on a drag-and-drop canvas, with guided flows and webhook support and no code anywhere. Build it once, and it never skips a step.", note:"Bots & Tools → Bots → Flow Builder"},
-      {t:"Coding Assistant", h:"Describe it; Zia writes the Deluge", f:"coding_assistant.png", d:"Describe it in plain language; Zia writes the Deluge", c:2,r:1,
-       long:"The Deluge Zia bot lets developers describe what they want to automate in plain language and generates accurate Deluge scripts from that intent. And with Zia tasks embedded in those scripts, the workflows themselves become intelligent: summarising content, extracting structured data, generating drafts, and reasoning through work that used to need manual handling.", note:"Bots & Tools: Deluge IDE → Zia"},
+      {t:"No-Code Bot Builder", h:"Build a bot without writing code", f:"flow_builder.png", d:"Build automations on a visual drag-and-drop canvas, no code", c:4,r:2,
+       long:"Drag blocks onto a visual canvas, connect them, and you’ve built a bot — no Deluge, no developer, no ticket to IT. Onboarding flows, approval chains, daily digests: set them up once and they never skip a step."},
+      {t:"Coding Assistant", h:"Describe it; Zia writes the code", f:"coding_assistant.png", d:"Describe it in plain language; Zia writes the Deluge", c:2,r:1,
+       long:"When you do want code, describe what you need in plain language and Zia writes the Deluge for you. “Post a summary to #standup every morning at 9” becomes working code — you review, tweak, ship."},
       {t:"Adaptive Widget Tabs", h:"Widgets that load instantly", f:"adaptive_widget_tabs.png", d:"Faster widgets that load only what you need", c:2,r:1,
-       long:"Widgets used to load everything at once. Now only the tab you’re on renders, so widgets open faster and stay current without pulling data you haven’t asked for. Static tabs cache smarter, and dynamic tabs scale up to 50 with search and runtime add, remove and reorder.", note:"Bots & Tools: Widgets → Create new → Build from Scratch"},
-      {t:"MCP Server & OpenAPI", h:"Your AI agent works inside Cliq", f:"mcp_server.png", d:"Connect external agents; turn any API into a tool", c:3,r:1,
-       long:"The Cliq MCP server connects agents like Claude, Cursor, or one you’ve built yourself to your workspace, so a plain instruction becomes a finished task. Post the launch announcement in #marketing, spin up a channel for the new project. You say it once, and the agent does it where the work lives. And it runs the other way too: any OpenAPI-defined API can become a tool your agents call."},
-      {t:"REST APIs v3", h:"Automate everything the UI can do", f:"rest_v3.png", d:"Full UI parity; docs open in Claude / ChatGPT", c:3,r:1,
-       long:"APIs aren’t read only by developers anymore. They’re parsed by LLMs and AI coding assistants, and neither forgives inconsistency. REST APIs v3 is a ground-up rebuild: one consistent pattern across the entire API, reaching everything the UI can do. The new docs open any endpoint directly in Claude or ChatGPT, with ready-to-run examples in six languages. Built for humans and their agents."},
+       long:"Widgets now load only what the current view needs, when it needs it. The result: tabs that open instantly instead of spinning, even for data-heavy dashboards."},
+      {t:"MCP Server & OpenAPI", h:"Plug in the agents you already use", f:"mcp_server.png", d:"Connect external agents; turn any API into a tool", c:2,r:1,
+       long:"Cliq now speaks MCP: connect external AI agents to your workspace, and turn any OpenAPI-described service into a tool those agents can call. The ecosystem you already trust plugs straight in."},
+      {t:"Bring Your Own AI Models", h:"Your AI, your choice", f:"byo_ai.png", d:"Anthropic, Cohere, Gemini, ChatGPT or Zoho AI + custom prompts", c:2,r:1,
+       long:"Choose the model behind your AI features — Anthropic, Cohere, Gemini, ChatGPT or Zoho AI — and shape it with custom prompts. Your org’s AI policy, your preferred provider, your rules."},
+      {t:"REST APIs v3", h:"Everything the UI does, via API", f:"rest_v3.png", d:"Full UI parity; docs open in Claude / ChatGPT", c:2,r:1,
+       long:"REST APIs v3 reaches full parity with the UI — if you can do it in Cliq, you can automate it. And the docs open directly in Claude or ChatGPT, so your AI assistant can read them while it writes your integration."},
     ]},
 
-  { title:"No one left behind",
-    desc:"Not just the core team. The guest from a client org joining a shared channel. The teammate who needs a little more support to stay fully in the conversation. Each of these was built with a specific person in mind. Click any card to explore.",
+  { kick:"All day", title:"Everyone’s in the room",
+    desc:"None of this works unless it works for everyone. Accessibility controls and Sign Language Mode make the workspace usable for all, Client Users bring partners into exactly the right channels, and Flexible Subscription gives each person the plan they need. Click any card to explore.",
     cards:[
-      {t:"Client Users", h:"Bring partners in, safely scoped", f:"client_users.png", d:"Bring guests into scoped channels & DMs", c:4,r:2,
-       long:"Say you have a partner, a vendor, or a client you’d like to bring into the workspace. Client users can be invited into select channels and to DM specific people, with access gated to exactly what the admin chooses and nothing beyond it. They see the work that concerns them as it happens, and the workspace keeps its shape."},
-      {t:"Accessibility", h:"Less working around the tool", f:"accessibility.png", d:"Font scaling, contrast & focus indicators (WCAG 2.0)", c:2,r:1,
-       long:"One teammate scales the type and raises the contrast, because that’s how she reads comfortably. Another navigates entirely by keyboard, with focus indicators finally visible enough to follow. The new settings cover font scaling, spacing, vision assistive support, focus indicators and link visibility, aligned with WCAG 2.0 standards. Less working around the tool. More working.", note:"Profile & Settings (G+P) → Accessibility"},
-      {t:"Sign Language Mode", h:"The interpreter never disappears", f:"sign_language.png", d:"Pin an interpreter on screen for everyone", c:2,r:1,
-       long:"Designate an interpreter in a meeting, and they stay pinned for everyone who turns on interpreter view. The person signing never disappears behind a grid shuffle, no matter who joins, leaves, or starts presenting. A step toward the WCAG Success Criterion 1.2.6 (Level AAA).", note:"In meeting → Enable Sign Interpreter"},
+      {t:"Accessibility", h:"A workspace everyone can use", f:"accessibility.png", d:"Font scaling, contrast & focus indicators (WCAG 2.0)", c:4,r:2,
+       long:"Font scaling, contrast controls and clear focus indicators — built to WCAG 2.0 — make Cliq usable for people with low vision, motor differences, or anyone who just wants bigger text. Accessibility settings live where everyone can find them."},
+      {t:"Sign Language Mode", h:"Keep the interpreter on screen", f:"sign_language.png", d:"Pin an interpreter on screen for everyone", c:2,r:1,
+       long:"Pin a sign language interpreter so they stay visible to everyone, at a readable size, for the entire meeting — no matter who’s speaking or presenting. Deaf and hard-of-hearing teammates get a first-class seat, not a shrinking tile."},
+      {t:"Client Users", h:"Bring partners in, safely scoped", f:"client_users.png", d:"Bring guests into scoped channels & DMs", c:2,r:1,
+       long:"Invite clients, vendors and partners into exactly the channels and DMs they need — and nothing else. They collaborate where the work is; your internal conversations stay internal."},
+      {t:"Flexible Subscription", h:"Pay for how your team actually works", f:"flexible_subscription.png", d:"Subscription tiers that match how your team is structured", c:6,r:1,
+       long:"Mix subscription tiers within one organization: full licenses for daily users, lighter plans for occasional ones. You pay for how your team is actually structured, not a one-size-fits-all seat count."},
     ]},
 
-  { type:"closing", title:"Until everything just Cliqs.",
-    desc:"None of these are big moments. But added up, across a day, they’re the difference between work that drains and work that flows." },
+  { type:"closing", kick:"5:00 PM", title:"That’s a wrap on the busywork.",
+    desc:"Dozens of fixes to the friction you stopped noticing, until everything just Cliqs." },
 ];
 
 let cur=0;
@@ -324,12 +320,13 @@ const TOTAL=SLIDES.reduce((n,s)=>n+(s.cards?s.cards.length:0),0);
 const stage=document.getElementById('stage');
 const dotsEl=document.getElementById('dots');
 const ft=document.getElementById('ft'), fp=document.getElementById('fp');
+const fkickwrap=document.getElementById('fkickwrap');
 const prev=document.getElementById('prev'), next=document.getElementById('next');
 const pgtxt=document.getElementById('pgtxt'), pgfill=document.getElementById('pgfill');
 
 /* ---------- live demos ---------- */
 const DEMO_MSGS=[
-  {who:"Priya", tag:"#launch", txt:"Launch checklist finalized, review by EOD"},
+  {who:"Priya", tag:"#launch", txt:"Launch checklist finalized — review by EOD"},
   {who:"Arun", tag:"#q3-okrs", txt:"Q3 OKRs updated with the new targets"},
   {who:"Meera", tag:"#launch", txt:"Landing page copy approved"},
   {who:"Dev", tag:"#design", txt:"New sidebar mockups attached"},
@@ -362,7 +359,7 @@ function demoHTML(kind){
       <span onclick="demoReply('Works for me 👍')">Works for me 👍</span>
       <span onclick="demoReply('4 PM instead?')">4 PM instead?</span>
     </div>
-    <div class="demo-hint">Tap a suggestion. That’s the whole flow.</div>
+    <div class="demo-hint">Tap a suggestion — that’s the whole flow.</div>
   </div>`;
   if(kind==="captions")return `
   <div class="demo" onclick="event.stopPropagation()">
@@ -380,7 +377,7 @@ function demoFilter(q){
   const hits=DEMO_MSGS.filter(m=>!q||m.txt.toLowerCase().includes(q)||m.who.toLowerCase().includes(q)||m.tag.replace("#","").includes(q));
   box.innerHTML = hits.length
     ? hits.slice(0,3).map(m=>`<div class="dres"><b>${m.who}</b><span class="rtag">${m.tag}</span><br>${m.txt}</div>`).join("")
-    : `<div class="dres">No matches, try “launch”</div>`;
+    : `<div class="dres">No matches — try “launch”</div>`;
 }
 function demoChip(el,q){
   const inp=el.closest('.demo').querySelector('input');
@@ -388,7 +385,7 @@ function demoChip(el,q){
 }
 function demoReply(txt){
   const sent=document.getElementById('demoSent'); if(!sent)return;
-  sent.innerHTML=`<div class="demo-bub out">${txt}</div><div class="demo-note">Sent in one tap ⚡</div>`;
+  sent.innerHTML=`<div class="demo-bub out">${txt}</div><div class="demo-note">Sent — one tap ⚡</div>`;
   const qr=document.getElementById('demoQR'); if(qr)qr.style.display='none';
   const hint=document.querySelector('.demo-hint'); if(hint)hint.style.display='none';
 }
@@ -438,9 +435,11 @@ function render(){
   stage.innerHTML=html;
   if(detail){
     const ds=SLIDES[detail.s], c=ds.cards[detail.c];
+    fkickwrap.innerHTML=ds.kick?`<span class="fkick">${ds.kick}</span>`:"";
     ft.textContent=c.t;
     fp.innerHTML=`Feature ${detail.c+1} of ${ds.cards.length} in “${ds.title}”`;
   } else {
+    fkickwrap.innerHTML=s.kick?`<span class="fkick">${s.kick}</span>`:"";
     ft.textContent=s.title;
     fp.innerHTML=s.desc + (s.type? "" : ' <a class="lm" href="#">Learn More</a>');
   }
@@ -454,6 +453,8 @@ function render(){
 
 function buildDetail(si,ci){
   const s=SLIDES[si], c=s.cards[ci];
+  const prevD = ci>0 ? `<button onclick="openDetail(${si},${ci-1})">← ${s.cards[ci-1].t}</button>` : "";
+  const nextD = ci<s.cards.length-1 ? `<button onclick="openDetail(${si},${ci+1})">${s.cards[ci+1].t} →</button>` : "";
   const media = c.demo? demoHTML(c.demo) : `
         <img src="${c.f}" alt="${c.t}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="ph" style="display:none"><b>${c.f}</b><span>${c.d}</span></div>`;
@@ -463,11 +464,11 @@ function buildDetail(si,ci){
     <div class="dwrap">
       <div class="dshot">${media}</div>
       <div class="dinfo">
-        <div class="dtags"><span class="dtag">${c.t}</span>${c.badge?`<span class="dtag warn">${c.badge}</span>`:""}</div>
+        <span class="dtag">${c.t}</span>
         <h2>${c.h}</h2>
         <p>${c.long}</p>
-        ${c.note?`<div class="dnote">ⓘ ${c.note}</div>`:""}
         <div class="dbtns"><a class="primary" href="#">Try it now</a><a class="ghost" href="#">Learn more</a></div>
+        <div class="dnav">${prevD}${nextD}</div>
       </div>
     </div>
   </div>`;
@@ -515,10 +516,10 @@ function buildWelcome(s){
         <span class="an-slot"></span><span class="an-slot ok"></span><span class="an-slot"></span><span class="an-slot"></span><span class="an-slot"></span>
       </div>
     </div>
-    <div class="an-card"><div class="an-t">Chat Tabs</div>
-      <div class="an-viz">
-        <div><span class="an-chip an-drift">Projects</span><span class="an-chip">Files</span><span class="an-chip an-drift">Analytics</span><span class="an-chip">Links</span></div>
-        <div class="an-bar l" style="margin-top:10px"></div><div class="an-bar m"></div><div class="an-bar s"></div>
+    <div class="an-card"><div class="an-t">Bring Your Own AI Model</div>
+      <div class="an-viz" style="text-align:center">
+        <div class="an-orb"></div>
+        <div><span class="an-chip">Claude</span><span class="an-chip">Gemini</span><span class="an-chip">GPT</span></div>
       </div>
     </div>
     <div class="an-card"><div class="an-t">No-Code Bot Builder</div>
@@ -541,40 +542,13 @@ function buildWelcome(s){
 }
 
 function go(i){detail=null;cur=Math.max(0,Math.min(SLIDES.length-1,i));render();}
-function nextStep(){
-  if(detail){
-    const s=SLIDES[detail.s];
-    if(detail.c < s.cards.length-1){ openDetail(detail.s, detail.c+1); }
-    else { const si=detail.s; detail=null; go(si+1); }
-  } else { go(cur+1); }
-}
-function prevStep(){
-  if(detail){
-    if(detail.c > 0){ openDetail(detail.s, detail.c-1); }
-    else { closeDetail(); }
-  } else { go(cur-1); }
-}
-prev.onclick=prevStep;
-next.onclick=nextStep;
-const modalEl=document.querySelector('.modal'), scrimEl=document.querySelector('.scrim'),
-      bgEl=document.querySelector('.bgdrop'), reopenBtn=document.getElementById('reopen');
-function closeTour(){
-  modalEl.style.display='none'; scrimEl.style.display='none';
-  bgEl.style.filter='none'; reopenBtn.style.display='inline-flex';
-  if(capTimer){clearInterval(capTimer);capTimer=null;}
-}
-function openTour(){
-  modalEl.style.display=''; scrimEl.style.display='';
-  bgEl.style.filter=''; reopenBtn.style.display='none';
-  render();
-}
-document.querySelector('.close').onclick=()=>{ if(detail){ closeDetail(); } else { closeTour(); } };
-reopenBtn.onclick=openTour;
+prev.onclick=()=>{ if(detail){closeDetail();} else {go(cur-1);} };
+next.onclick=()=>{ if(detail){closeDetail();} else {go(cur+1);} };
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT')return;
   if(e.key==='Escape'&&detail){closeDetail();return;}
-  if(e.key==='ArrowRight'){nextStep();}
-  if(e.key==='ArrowLeft'){prevStep();}
+  if(e.key==='ArrowRight'){detail?closeDetail():go(cur+1);}
+  if(e.key==='ArrowLeft'){detail?closeDetail():go(cur-1);}
 });
 render();
 </script>
