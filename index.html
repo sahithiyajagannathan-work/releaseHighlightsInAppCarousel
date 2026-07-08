@@ -7,12 +7,14 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:#0f1320;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    background:#0f1320;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
   .bgdrop{position:fixed;inset:0;z-index:0;background:#0f1320 url('cliq_home.png') center/cover no-repeat;filter:blur(11px);transform:scale(1)}
   .scrim{position:fixed;inset:0;z-index:1;background:rgba(10,14,25,.42)}
-  .modal{width:min(1180px,98vw);background:
+  .modal{width:min(1180px,96vw);height:min(760px,94vh);background:
       radial-gradient(120% 90% at 0% 0%, #ece9ff 0%, #f3f1fb 42%, #eaf5ee 100%);
-    border-radius:30px;padding:30px 30px 0;position:relative;z-index:2;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+    border-radius:30px;padding:24px 28px 0;position:relative;z-index:2;box-shadow:0 30px 80px rgba(0,0,0,.5);
+    display:flex;flex-direction:column;overflow:hidden}
+  #stage{flex:1;min-height:0;overflow-y:auto;scrollbar-gutter:stable}
   .badge{position:absolute;top:18px;left:30px;font-weight:800;font-size:22px;color:#4f5bff;display:flex;align-items:baseline;gap:8px}
   .badge small{font-size:14px;color:#8a92a6;font-weight:600}
   .close{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:50%;
@@ -30,7 +32,7 @@
   .pgbar{width:108px;height:5px;border-radius:4px;background:#eef0f6;margin-top:5px;overflow:hidden}
   .pgbar i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#4f5bff,#8a3ffd);transition:width .45s ease}
 
-  .grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:172px;gap:16px;margin-top:54px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:46px;grid-auto-rows:158px}
   .card{background:#fff;border-radius:18px;border:1px solid rgba(0,0,0,.04);
     box-shadow:0 10px 30px rgba(28,36,60,.08);padding:16px 16px 0;overflow:hidden;display:flex;flex-direction:column;
     position:relative;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
@@ -88,21 +90,21 @@
     padding:8px 11px;border-radius:9px;min-height:32px;line-height:1.45}
 
   /* ---- feature detail view ---- */
-  .detail{margin-top:54px;min-height:470px;display:flex;flex-direction:column;animation:dfade .3s ease}
+  .detail{margin-top:46px;min-height:0;display:flex;flex-direction:column;animation:dfade .3s ease}
   @keyframes dfade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .dback{align-self:flex-start;background:#fff;border:1px solid #cfd5e6;color:#3f4658;border-radius:11px;
     padding:9px 16px;font-size:13.5px;font-weight:600;cursor:pointer;margin-bottom:18px}
   .dback:hover{border-color:#4f5bff;color:#4f5bff}
   .dwrap{display:grid;grid-template-columns:1.35fr 1fr;gap:30px;flex:1;align-items:stretch;padding-bottom:10px}
   .dshot{position:relative;background:#fff;border:1px solid #eef0f6;border-radius:18px;overflow:hidden;
-    box-shadow:0 16px 40px rgba(28,36,60,.10);min-height:380px}
+    box-shadow:0 16px 40px rgba(28,36,60,.10);min-height:340px}
   .dshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14px}
   .dinfo{display:flex;flex-direction:column;justify-content:center}
   .dtags{display:flex;gap:8px;margin-bottom:14px}
   .dtag{display:inline-flex;font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
     background:#eef1fb;color:#4f5bff;border-radius:8px;padding:5px 10px}
   .dtag.warn{background:#fff3e8;color:#e2410e}
-  .dinfo h2{font-size:34px;font-weight:800;color:#10142a;line-height:1.12;letter-spacing:-.5px;margin-bottom:14px}
+  .dinfo h2{font-size:28px;font-weight:800;color:#10142a;line-height:1.12;letter-spacing:-.5px;margin-bottom:12px}
   .dinfo p{font-size:15.5px;color:#3f4658;line-height:1.6;max-width:420px}
   .dnote{margin-top:16px;font-size:13px;color:#6b7385;background:#f4f6fb;border:1px solid #e7e9f0;border-radius:10px;padding:10px 14px;max-width:420px;line-height:1.5}
   .dbtns{display:flex;gap:12px;margin-top:24px}
@@ -116,7 +118,7 @@
   @media(max-width:880px){.dwrap{grid-template-columns:1fr}.dshot{min-height:220px}}
 
   /* welcome + closing */
-  .center{margin-top:60px;min-height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px}
+  .center{margin-top:46px;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px}
   .center h1{font-size:60px;font-weight:800;line-height:1;background:linear-gradient(90deg,#4f5bff,#8a3ffd);
     -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px}
   .center p{font-size:17px;color:#3f4658;max-width:600px;line-height:1.55}
@@ -132,9 +134,9 @@
   .ctaBtns .primary{background:#4f5bff;color:#fff} .ctaBtns .ghost{background:#fff;border:1px solid #cfd5e6;color:#3f4658}
 
   /* ---- announcement (slide 1) ---- */
-  .an-head{text-align:center;max-width:880px;margin:38px auto 26px}
+  .an-head{text-align:center;max-width:880px;margin:26px auto 18px}
   .an-kick{font-size:22px;font-weight:800;background:linear-gradient(90deg,#3aa0ff,#7a5cff);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .an-h1{font-size:60px;font-weight:850;color:#10142a;letter-spacing:-1px;line-height:1;margin:6px 0 16px}
+  .an-h1{font-size:46px;font-weight:850;color:#10142a;letter-spacing:-1px;line-height:1;margin:6px 0 12px}
   .an-h1 span{background:linear-gradient(90deg,#4f5bff,#8a3ffd);-webkit-background-clip:text;background-clip:text;color:transparent}
   .an-sub{font-size:15.5px;color:#4a5266;line-height:1.5;max-width:600px;margin:0 auto}
   .an-btns{display:flex;gap:13px;justify-content:center;margin-top:22px}
@@ -195,23 +197,25 @@
   @keyframes anhl{0%,100%{transform:translateX(0)}50%{transform:translateX(-7px)}}
   @media(max-width:880px){.an-collage{grid-template-columns:repeat(2,1fr)}.an-h1{font-size:42px}}
 
-  .dots{display:flex;gap:8px;justify-content:center;padding:22px 0 18px}
+  .dots{display:flex;gap:8px;justify-content:center;padding:12px 0 10px}
   .dots i{width:8px;height:8px;border-radius:50%;background:#cfd5e6;display:block;cursor:pointer}
   .dots i.on{width:24px;border-radius:8px;background:#4f5bff}
 
   .foot{background:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.7);
-    margin:0 -30px;padding:24px 40px 28px;border-radius:0 0 30px 30px;display:grid;
+    margin:0 -28px;padding:14px 36px 16px;border-radius:0 0 30px 30px;display:grid;
     grid-template-columns:120px 1fr 120px;align-items:center;gap:20px}
   .foot .t{grid-column:2;text-align:center}
-  .foot h2{font-size:30px;font-weight:800;background:linear-gradient(90deg,#4f5bff,#8a3ffd);
-    -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
-  .foot p{font-size:14.5px;color:#3f4658;line-height:1.5;max-width:760px;margin:0 auto}
+  .foot h2{font-size:22px;font-weight:800;background:linear-gradient(90deg,#4f5bff,#8a3ffd);
+    -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:5px}
+  .foot p{font-size:13px;color:#3f4658;line-height:1.45;max-width:760px;margin:0 auto}
   .foot a.lm{color:#4f5bff;font-weight:600;text-decoration:none}
   .nav{display:inline-flex;align-items:center;justify-content:center;border:1px solid #cfd5e6;background:#fff;
     color:#3f4658;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:600;cursor:pointer;gap:6px;user-select:none}
   .nav.prev{grid-column:1} .nav.next{grid-column:3;background:#4f5bff;color:#fff;border-color:#4f5bff}
   .nav[disabled]{opacity:.4;cursor:default}
   @media(max-width:780px){.grid{grid-template-columns:repeat(2,1fr)}.card{grid-column:span 2 !important;grid-row:span 1 !important}.foot{grid-template-columns:1fr}.foot .t,.nav{grid-column:1}.prog{display:none}}
+
+  /* fixed-size tour: content scrolls inside the stage instead of resizing the modal */
 </style>
 </head>
 <body>
@@ -239,27 +243,27 @@ const SLIDES = [
   { title:"Built to give your time back",
     desc:"Work has a habit of scattering itself. Almost everything you look for already exists somewhere, the file shared, the question answered, the decision made. What gets lost is the path back to it, and that’s what this release rebuilds. Click any card to explore, the search box is live.",
     cards:[
-      {t:"Advanced Search", h:"Find any message in seconds", f:"advanced_search.png", d:"Pinpoint a message by sender, channel, date, tag & content", c:4,r:2, demo:"search",
+      {t:"Advanced Search", h:"Find any message in seconds", f:"advanced_search.png", d:"Pinpoint a message by sender, channel, date, tag & content", c:8,r:2, demo:"search",
        long:"Stop scrolling to find that one message. Filter by sender, channel, date range, tag and content type, across Messages, Links and Files, and land on exactly what you were looking for.", note:"Search (Cmd/Ctrl + K) → Advanced search"},
-      {t:"Hashtags", h:"One tag brings the story back", f:"hashtags.png", d:"Mark what matters; one search brings the story back", c:2,r:1,
+      {t:"Hashtags", h:"One tag brings the story back", f:"hashtags.png", d:"Mark what matters; one search brings the story back", c:4,r:1,
        long:"A project never stays in one conversation. It lives in two channels, six DMs and a thread abandoned in April. Tag the messages that matter as they happen, #launch, #q3-okrs, anything. Later, one click on the tag pulls every related message back together, across chats and channels, in order. Context that used to take twenty minutes of scrolling now takes one tap.", note:"History → Hashtags"},
-      {t:"Replies View", h:"Every reply to you, in one place", f:"replies_view.png", d:"Every reply & @mention to you, in one place", c:2,r:1,
+      {t:"Replies View", h:"Every reply to you, in one place", f:"replies_view.png", d:"Every reply & @mention to you, in one place", c:4,r:1,
        long:"Every reply and @mention directed at you, collected in a single view. No more re-opening ten channels to check whether someone answered, your follow-ups come to you, in one place, in order.", note:"You can also set whether your unread badge counts mentions, replies, or both."},
-      {t:"Enriched Sidebar", h:"Your chat list, decluttered", f:"enriched_sidebar.png", d:"Search & filters in the sidebar: unread, @mentions, drafts, DMs", c:2,r:1,
+      {t:"Enriched Sidebar", h:"Your chat list, decluttered", f:"enriched_sidebar.png", d:"Search & filters in the sidebar: unread, @mentions, drafts, DMs", c:4,r:1,
        long:"The left panel now carries its own search, and filters that cut through the stack: unread, unread @mentions, drafts and direct messages, with mark all as read one click away. Tap the unread filter and the list narrows to just the chats waiting on you. Collapse the sidebar entirely when you need full focus, and your messages get centre stage."},
-      {t:"Multimedia Summaries", h:"Know what’s inside before opening", f:"multimedia_summaries.png", d:"Key points from images, audio, video & PDFs", c:2,r:1,
+      {t:"Multimedia Summaries", h:"Know what’s inside before opening", f:"multimedia_summaries.png", d:"Key points from images, audio, video & PDFs", c:4,r:1,
        long:"That 40-minute recording someone dropped in the channel? Get the key points first. Cliq summarizes images, audio, video and PDFs so you can decide in seconds whether a file needs your attention, before you open it."},
-      {t:"Voice Transcripts", h:"Read voice notes anywhere", f:"voice_transcripts.png", d:"Read any voice message at your own pace", c:2,r:1,
+      {t:"Voice Transcripts", h:"Read voice notes anywhere", f:"voice_transcripts.png", d:"Read any voice message at your own pace", c:4,r:1,
        long:"Voice messages are faster to send, but not always convenient to hear. The update you need might be twenty seconds in, and sometimes you’re in a meeting or on a train. Every voice message now comes with a transcript, so you can read it at your pace and place. Skim it, search it, quote it. Listen only when you want to."},
     ]},
 
   { title:"Work, uninterrupted",
     desc:"Every trip out of a conversation costs something. Ten seconds to switch, ten to remember why. It happens twenty times a day, and every switch costs you the thought you were holding when you left. This set closes that gap. Click any card to explore, the replies are tappable.",
     cards:[
-      {t:"Chat Tabs", h:"Your work, pinned above the chat", f:"chat_tabs.png", d:"Pin Projects, Files, Widgets, Forms, Links & Analytics above the chat", c:4,r:2,
+      {t:"Chat Tabs", h:"Your work, pinned above the chat", f:"chat_tabs.png", d:"Pin Projects, Files, Widgets, Forms, Links & Analytics above the chat", c:8,r:2,
        long:"Your product document is in Writer, the tracker in a Sheet, the dashboard in Analytics, and every “check the details” sends you on a small expedition. Chat tabs pin these work items above the chat: tasks, files, widgets, forms, links, dashboards and reports, all within arm’s reach.", note:"Supports: Projects · WorkDrive · Widgets · Forms · Analytics · Links"},
-      {t:"Quick Replies", h:"Reply in one tap", f:"quick_replies.png", d:"Suggested replies & one-tap actions, in the same breath as deciding", c:2,r:2, demo:"replies", badge:"Admin opt-in",
-       long:"Cliq suggests context-aware replies and one-tap actions the moment a message arrives, so the gap between deciding and doing disappears. Approve, confirm, or answer in the same breath as reading.", note:"AI features ship off by default. Your admin can enable Quick Replies from the Admin Panel."},
+      {t:"Quick Replies", h:"Reply in one tap", f:"quick_replies.png", d:"Suggested replies & one-tap actions, in the same breath as deciding", c:4,r:2, demo:"replies", badge:"Admin opt-in",
+       long:"Cliq suggests context-aware replies and one-tap actions the moment a message arrives, so the gap between deciding and doing disappears. Approve, confirm, or answer in the same breath as reading.", note:"Your admin can enable Quick Replies from the Admin Panel."},
       {t:"Auto-Response 2.0", h:"Your absence answers for itself", f:"auto_response.png", d:"Out-of-office replies for DMs, channels & external users", c:3,r:1,
        long:"Set your out-of-office and someone will still @mention you in a channel. Not carelessly, they just don’t know. The auto-response now answers there too, covering group chats, channels and external channels alongside DMs. It replies once per 24 hours, only on mention, with the same message everywhere or a different one per context.", note:"Click on your profile picture → Auto-response"},
       {t:"Composer Upgrades", h:"Cleaner messages, less effort", f:"composer.png", d:"Lists, nested lists & cleaner formatting", c:3,r:1,
@@ -273,41 +277,41 @@ const SLIDES = [
   { title:"Meetings that keep up",
     desc:"Meet without the friction. Slot Suggestions end the scheduling negotiation before it begins, the chat bar lets you start or join from anywhere in Zoho, Live Captions keep everyone following along, and PiP keeps the call in view as you work. Click any card to explore, the captions are live.",
     cards:[
-      {t:"Live Captions", h:"Nobody misses a word", f:"live_captions.png", d:"Real-time captions, with summaries & action items after", c:4,r:2, demo:"captions",
+      {t:"Live Captions", h:"Nobody misses a word", f:"live_captions.png", d:"Real-time captions, with summaries & action items after", c:8,r:2, demo:"captions",
        long:"Real-time captions keep everyone following along, noisy cafés, quiet offices, non-native speakers, hard-of-hearing teammates. And when the meeting ends, summaries and action items are waiting, so nobody has to have been taking notes. English and Hindi to start, more coming soon.", note:"Turn captions on or off from More Options in the meeting toolbar."},
-      {t:"Slot Suggestions", h:"End the scheduling back-and-forth", f:"slot_suggestions.png", d:"See when everyone’s free", c:2,r:2,
+      {t:"Slot Suggestions", h:"End the scheduling back-and-forth", f:"slot_suggestions.png", d:"See when everyone’s free", c:4,r:2,
        long:"Scheduling a meeting is itself a meeting. “Does Thursday work?” travels through four people and comes back on Wednesday. Now, add participants to an event and their free and busy slots surface immediately, with suggested times the whole group can make. The negotiation ends before it begins.", note:"Schedule meeting → Slot suggestions under Participants"},
-      {t:"PiP Support", h:"Keep the call in view while you work", f:"pip.png", d:"Keep the call nearby while you work", c:2,r:1,
+      {t:"PiP Support", h:"Keep the call in view while you work", f:"pip.png", d:"Keep the call nearby while you work", c:4,r:1,
        long:"Picture-in-picture keeps the call nearby in a compact window while you check your mail, review a document, update a task, or pull up the information someone just asked for."},
-      {t:"Pin Video", h:"Keep the key speaker in focus", f:"pin_video.png", d:"Keep the key speaker in focus", c:2,r:1,
+      {t:"Pin Video", h:"Keep the key speaker in focus", f:"pin_video.png", d:"Keep the key speaker in focus", c:4,r:1,
        long:"Pin the person who matters, the presenter, the interviewer, the interpreter, and they stay front no matter who else speaks. The grid stops shuffling; your attention stops chasing it."},
-      {t:"Meetings in Chat Bar", h:"Start or join from anywhere", f:"meetings_chat_bar.png", d:"Start or join from anywhere in Zoho", c:2,r:1,
+      {t:"Meetings in Chat Bar", h:"Start or join from anywhere", f:"meetings_chat_bar.png", d:"Start or join from anywhere in Zoho", c:4,r:1,
        long:"The Cliq chat bar brings conversations and meetings closer to wherever you’re already working across Zoho. Join a Cliq meeting or start a quick call from Mail, Writer, or any Workplace app, without switching back and forth."},
     ]},
 
   { title:"Build it once",
     desc:"Software is learning to act, not just respond. The repetitive layer of work should run on its own, so human attention goes where creativity and judgment actually matter. This is the platform layer, where Cliq becomes a surface you build on. Click any card to explore.",
     cards:[
-      {t:"No-Code Bot Builder", h:"Build it once, it never skips a step", f:"flow_builder.png", d:"Build automations on a visual drag-and-drop canvas, no code", c:4,r:2,
+      {t:"No-Code Bot Builder", h:"Build it once, it never skips a step", f:"flow_builder.png", d:"Build automations on a visual drag-and-drop canvas, no code", c:8,r:2,
        long:"Every team has its rituals. The new hire who gets the same four links and five channel invites assembled by hand, the IT channel answering the same how-do-I question every week. Flow Builder turns these into bots anyone can put together on a drag-and-drop canvas, with guided flows and webhook support and no code anywhere. Build it once, and it never skips a step.", note:"Bots & Tools → Bots → Flow Builder"},
-      {t:"Coding Assistant", h:"Describe it; Zia writes the Deluge", f:"coding_assistant.png", d:"Describe it in plain language; Zia writes the Deluge", c:2,r:1,
+      {t:"Coding Assistant", h:"Describe it; Zia writes the Deluge", f:"coding_assistant.png", d:"Describe it in plain language; Zia writes the Deluge", c:4,r:1,
        long:"The Deluge Zia bot lets developers describe what they want to automate in plain language and generates accurate Deluge scripts from that intent. And with Zia tasks embedded in those scripts, the workflows themselves become intelligent: summarising content, extracting structured data, generating drafts, and reasoning through work that used to need manual handling.", note:"Bots & Tools: Deluge IDE → Zia"},
-      {t:"Adaptive Widget Tabs", h:"Widgets that load instantly", f:"adaptive_widget_tabs.png", d:"Faster widgets that load only what you need", c:2,r:1,
+      {t:"Adaptive Widget Tabs", h:"Widgets that load instantly", f:"adaptive_widget_tabs.png", d:"Faster widgets that load only what you need", c:4,r:1,
        long:"Widgets used to load everything at once. Now only the tab you’re on renders, so widgets open faster and stay current without pulling data you haven’t asked for. Static tabs cache smarter, and dynamic tabs scale up to 50 with search and runtime add, remove and reorder.", note:"Bots & Tools: Widgets → Create new → Build from Scratch"},
-      {t:"MCP Server & OpenAPI", h:"Your AI agent works inside Cliq", f:"mcp_server.png", d:"Connect external agents; turn any API into a tool", c:3,r:1,
+      {t:"MCP Server & OpenAPI", h:"Your AI agent works inside Cliq", f:"mcp_server.png", d:"Connect external agents; turn any API into a tool", c:6,r:1,
        long:"The Cliq MCP server connects agents like Claude, Cursor, or one you’ve built yourself to your workspace, so a plain instruction becomes a finished task. Post the launch announcement in #marketing, spin up a channel for the new project. You say it once, and the agent does it where the work lives. And it runs the other way too: any OpenAPI-defined API can become a tool your agents call."},
-      {t:"REST APIs v3", h:"Automate everything the UI can do", f:"rest_v3.png", d:"Full UI parity; docs open in Claude / ChatGPT", c:3,r:1,
+      {t:"REST APIs v3", h:"Automate everything the UI can do", f:"rest_v3.png", d:"Full UI parity; docs open in Claude / ChatGPT", c:6,r:1,
        long:"APIs aren’t read only by developers anymore. They’re parsed by LLMs and AI coding assistants, and neither forgives inconsistency. REST APIs v3 is a ground-up rebuild: one consistent pattern across the entire API, reaching everything the UI can do. The new docs open any endpoint directly in Claude or ChatGPT, with ready-to-run examples in six languages. Built for humans and their agents."},
     ]},
 
   { title:"No one left behind",
     desc:"Not just the core team. The guest from a client org joining a shared channel. The teammate who needs a little more support to stay fully in the conversation. Each of these was built with a specific person in mind. Click any card to explore.",
     cards:[
-      {t:"Client Users", h:"Bring partners in, safely scoped", f:"client_users.png", d:"Bring guests into scoped channels & DMs", c:4,r:2,
+      {t:"Client Users", h:"Bring partners in, safely scoped", f:"client_users.png", d:"Bring guests into scoped channels & DMs", c:8,r:2,
        long:"Say you have a partner, a vendor, or a client you’d like to bring into the workspace. Client users can be invited into select channels and to DM specific people, with access gated to exactly what the admin chooses and nothing beyond it. They see the work that concerns them as it happens, and the workspace keeps its shape."},
-      {t:"Accessibility", h:"Less working around the tool", f:"accessibility.png", d:"Font scaling, contrast & focus indicators (WCAG 2.0)", c:2,r:1,
+      {t:"Accessibility", h:"Less working around the tool", f:"accessibility.png", d:"Font scaling, contrast & focus indicators (WCAG 2.0)", c:4,r:1,
        long:"One teammate scales the type and raises the contrast, because that’s how she reads comfortably. Another navigates entirely by keyboard, with focus indicators finally visible enough to follow. The new settings cover font scaling, spacing, vision assistive support, focus indicators and link visibility, aligned with WCAG 2.0 standards. Less working around the tool. More working.", note:"Profile & Settings (G+P) → Accessibility"},
-      {t:"Sign Language Mode", h:"The interpreter never disappears", f:"sign_language.png", d:"Pin an interpreter on screen for everyone", c:2,r:1,
+      {t:"Sign Language Mode", h:"The interpreter never disappears", f:"sign_language.png", d:"Pin an interpreter on screen for everyone", c:4,r:1,
        long:"Designate an interpreter in a meeting, and they stay pinned for everyone who turns on interpreter view. The person signing never disappears behind a grid shuffle, no matter who joins, leaves, or starts presenting. A step toward the WCAG Success Criterion 1.2.6 (Level AAA).", note:"In meeting → Enable Sign Interpreter"},
     ]},
 
@@ -449,6 +453,7 @@ function render(){
   next.disabled = !detail && cur===SLIDES.length-1;
   pgtxt.innerHTML=`<b>${explored.size}</b> / ${TOTAL} explored`;
   pgfill.style.width=Math.round(explored.size/TOTAL*100)+"%";
+  document.querySelector('.prog').style.display = (!detail && s.type==="welcome") ? 'none' : '';
   initDemos();
 }
 
